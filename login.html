@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Authentication System</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            height: 100vh;
+            background-color: #222;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: #333;
+            border-radius: 10px;
+            padding: 50px;
+            width: 400px;
+            box-shadow: 0 0 10px 0 #000;
+        }
+
+        h1 {
+            color: #f0f0f0;
+            text-align: center;
+            font-size: 36px;
+            margin: 10px 0;
+            font-style: italic;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #888;
+            border-radius: 5px;
+            font-weight: bolder;
+            font-size: 17px;
+        }
+
+        button {
+            width: 109%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #008CBA;
+            color: white;
+            cursor: pointer;
+            font-weight: bolder;
+            font-size: 17px;
+        }
+
+        .message {
+            color: #FF4500;
+            text-align: center;
+            margin: 5px 0;
+        }
+
+        .signup-link {
+            color: #ccc;
+            margin-top: 10px;
+        }
+
+        .signup-link a {
+            color: #008CBA;
+            text-decoration: none;
+        }
+
+        #welcomePage {
+            display: none;
+        }
+
+        #signupPage {
+            display: none;
+        }
+        
+        h2{
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+        }
+        #welcomePage p {
+             text-align: center;
+             font-size: 24px; /* You can adjust the font size here */
+        }
+
+        @keyframes animateText {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login Authentication System</h1>
+        <div id="loginPage">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="text" id="loginUsername" placeholder="Username" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <br>
+                <button type="button" onclick="login()">Login</button>
+            </form>
+            <p class="message" id="loginMessage"></p>
+            <div class="signup-link">
+                <p><b>Don't have an account? </b><a href="#" onclick="showSignup()"><b>Sign up here</b></a></p>
+            </div>
+        </div>
+
+        <div id="welcomePage">
+            <h1>Welcome</h1>
+            <p style="text-align: center;">Login Successful!</p>
+        </div>
+
+        <div id="signupPage">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <input type="text" id="signupUsername" placeholder="New Username" required>
+                <input type="password" id="signupPassword" placeholder="New Password" required>
+                <br>
+                <button type="button" onclick="signup()">Sign Up</button>
+            </form>
+            <p class="message" id="signupMessage"></p>
+            <div class="signup-link">
+            <p><b>Already have an account? </b><a href="#" onclick="showLogin()"><b>Sign in here</b></a></p>
+</div>
+
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            var username = document.getElementById("loginUsername").value;
+            var password = document.getElementById("loginPassword").value;
+
+            if (username === '' || password === '') {
+                document.getElementById("loginMessage").innerHTML = "Please fill out all fields.";
+            } else {
+                document.getElementById("loginPage").style.display = "none";
+                document.getElementById("welcomePage").style.display = "block";
+            }
+        }
+
+        function showSignup() {
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("signupPage").style.display = "block";
+        }
+        function showLogin() {
+    document.getElementById("signupPage").style.display = "none";
+    document.getElementById("loginPage").style.display = "block";
+}
+
+        function signup() {
+            var username = document.getElementById("signupUsername").value;
+            var password = document.getElementById("signupPassword").value;
+
+            if (username === '' || password === '') {
+                document.getElementById("signupMessage").innerHTML = "Please fill out all fields.";
+            } else {
+                document.getElementById("signupPage").style.display = "none";
+                document.getElementById("welcomePage").style.display = "block";
+                document.getElementById("welcomePage").querySelector('p').innerHTML = "Account created successfully!";
+            }
+        }
+        document.getElementById("loginPassword").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            login();
+        }
+    });
+    document.getElementById("signupPassword").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            signup();
+        }
+    });
+    </script>
+</body>
+</html>
